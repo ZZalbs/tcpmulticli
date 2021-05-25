@@ -158,11 +158,34 @@ int main(int argc, char **argv)
             fgets(buf, BUF_SIZE, stdin);
             buf[strlen(buf) - 1] = 0;
             if (!strcmp(buf, "q") || !strcmp(buf, "Q")) break;
+	
 
+<<<<<<< Updated upstream
             // IMPLEMENT VIEW CLIENT LIST HERE
             // if (GETCH(ESC))
             // <...>
 
+=======
+		//CHANGJIN modify _ IMPLEMENT VIEW CLIENT LIST HERE
+            if (GETCH(ESC))
+            {
+		for(int i=0;i<sizeof(client)/sizeof(int);i++)	
+		{
+			printf("%s : ",name[i]);
+			switch(client[i])
+			{
+				case 0:
+				printf("ON");
+				break;
+				case -1:
+				printf("OFF");
+			}
+			printf("\n");
+		}
+	    }
+
+		
+>>>>>>> Stashed changes
             // CHECK FOR EMOJIS
             char mdest[BUF_SIZE], umdest[BUF_SIZE] = "\nMESSAGE FROM SERVER:\n";
             char *index = strstr(buf, ":myh:");
@@ -252,14 +275,20 @@ int main(int argc, char **argv)
                     client[i] = -1;
 
                     // IF NAME WAS SET (HAD ACTUALLY ENGAGED IN CHAT)
+<<<<<<< Updated upstream
+=======
+                    // 연결 해제된 클라이언트의 이름을 지워 준다
+
+		//changjin modify_ client name discarding feature remove
+>>>>>>> Stashed changes
                     if (names[i][0])
                     {
                         // SEND DISCONNECT INFORMATION TO ALL CLIENTS
                         memset(message, 0, BUF_SIZE);
                         sprintf(message, "%s left the chat.", names[i]);
                         sendAll(clnt_cnt, 1000, serv_name, message, message);
-
-                        memset(names[i], 0, NAME_SIZE);
+			
+                        //memset(names[i], 0, NAME_SIZE);
                     }
 
                     prompt_printed = 0;
